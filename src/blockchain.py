@@ -52,7 +52,7 @@ class Block:
 
 
 class BlockChain:
-    difficulty = 2
+    difficulty = 3
     previous_article = ""
     article_index = -1
 
@@ -122,7 +122,6 @@ class BlockChain:
         while not computed_hash.startswith('0' * self.difficulty):
             block.nonce += 1
             computed_hash = block.compute_hash()
-            # print(computed_hash)
         return computed_hash
 
     def get_chain_size(self):
@@ -193,7 +192,7 @@ class BlockChain:
         Make merkle tree from a list of transactions and return root hash
         """
         tree = MerkleTree(transactions)
-        beautify(tree)
+        # beautify(tree)
         stdev = self.standard_dev(transactions)
         mean = self.mean(transactions)
         variance = self.variance(transactions)
@@ -221,12 +220,42 @@ class BlockChain:
 if __name__ == '__main__':
 
     c = BlockChain()  # Start a chain
-    c.add_new_transaction("coronavirus is a hoax")
-    for i in range(1, 7):
-        c.add_new_transaction(i)
-    c.add_new_transaction("vaccine is good")
-    for i in range(3, 15):
-        c.add_new_transaction(i)
+    import random
+    import time
+    claims = []
+    cmd = input("Enter claim 1:\n")
+    claims.append(cmd)
+    c.add_new_transaction(cmd)
+    for i in range(10):
+        random_num = random.randint(0, 3)
+        print(f"Randomly generated evaluation: {random_num}")
+        time.sleep(1)
+        c.add_new_transaction(random_num)
+    time.sleep(1.5)
+    cmd = input("Enter claim 2:\n")
+    claims.append(cmd)
+    c.add_new_transaction(cmd)
+    for i in range(10):
+        random_num = random.randint(6, 10)
+        print(f"Randomly generated evaluation: {random_num}")
+        time.sleep(1)
+        c.add_new_transaction(random_num)
+    time.sleep(1.5)
+    cmd = input("Enter claim 3:\n")
+    claims.append(cmd)
+    # print("Claim 3: Healthy people do not need to wear masks")
+    c.add_new_transaction(cmd)
+    for i in range(10):
+        random_num = random.randint(3, 10)
+        print(f"Randomly generated evaluation: {random_num}")
+        time.sleep(1.5)
+        c.add_new_transaction(random_num)
+    print("Mining")
+    time.sleep(3)
     c.mine()
-
-    pprint(c.asdict())
+    print()
+    for i, review in enumerate(c.asdict()):
+        print(f"Block {i + 1}: {claims[i]}")
+        print()
+        pprint(review)
+        print()
