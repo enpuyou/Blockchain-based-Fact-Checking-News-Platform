@@ -251,7 +251,7 @@ if __name__ == '__main__':
         time.sleep(1.5)
         c.add_new_transaction(random_num)
     print("Mining")
-    time.sleep(3)
+    time.sleep(2)
     c.mine()
     print()
     for i, review in enumerate(c.asdict()):
