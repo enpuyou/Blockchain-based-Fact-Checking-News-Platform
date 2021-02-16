@@ -1,4 +1,5 @@
-# Blockchain-based fact-checking news platform
+# Agua Fresca
+#### Blockchain-based fact-checking news platform
 
 The project here is a final project submitted for the cryptocurrency course. It
 proposes a proof of concept for a decentralized news platform that integrates
